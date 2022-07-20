@@ -4,7 +4,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
-            "Container\\": "container/"
+            "Globe\\Container\\": "container/",
+            "Globe\\Collection\\": "collection/"
         }
     },
     "authors": [
