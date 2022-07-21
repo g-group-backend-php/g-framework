@@ -2,23 +2,30 @@
 
 namespace App;
 
+use Globe\Container\Container;
+use Globe\Http\Model\Request;
+use Globe\Http\Model\Response;
+use Globe\Http\Router;
 use ReflectionClass;
-use App\Controller\GlobeController;
-use Container\Container;
 
 class App
 {
     protected Container $container;
+    protected Router $router;
 
     public function __construct()
     {
         $this->createContainer();
+        $this->router = new Router();
     }
 
     public function run(): void
     {
-        // Nie mamy routera, więc z łapy wywołujemy metodę show kontrolera
-        $this->callMethod(GlobeController::class, 'show');
+        $route = $this->router->resolve(Request::create());
+
+        /** @var Response $response */
+        $response = $this->callMethod($route->getController(), $route->getAction());
+        $response->render();
     }
 
     public function createContainer(): void

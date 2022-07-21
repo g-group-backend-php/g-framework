@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Service\GlobeService;
+use Globe\Http\Model\Response;
 
 class GlobeController
 {
-    public function show(GlobeService $service): void
+    public function show(GlobeService $service): Response
     {
-        echo json_encode($service->getMessage());
+        return new Response(200, $service->getMessage());
     }
 }
