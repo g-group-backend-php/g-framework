@@ -1,6 +1,6 @@
 <?php
 
-namespace Globe\Http\Model;
+namespace Globe\Http;
 
 use Globe\Http\Enum\Method;
 

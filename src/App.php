@@ -3,9 +3,10 @@
 namespace App;
 
 use Globe\Container\Container;
-use Globe\Http\Model\Request;
-use Globe\Http\Model\Response;
-use Globe\Http\Router;
+use Globe\Http\Request;
+use Globe\Http\Response;
+use Globe\Http\Router\Router;
+use Globe\Http\Router\RouterFactory;
 use ReflectionClass;
 
 class App
@@ -16,7 +17,8 @@ class App
     public function __construct()
     {
         $this->createContainer();
-        $this->router = new Router();
+        $routerFactory = new RouterFactory();
+        $this->router = $routerFactory->createRouter();
     }
 
     public function run(): void

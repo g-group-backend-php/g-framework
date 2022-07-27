@@ -1,6 +1,6 @@
 <?php
 
-namespace Globe\Http;
+namespace Globe\Http\Exception;
 
 use Globe\Http\Enum\Status;
 
