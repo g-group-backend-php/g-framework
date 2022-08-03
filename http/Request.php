@@ -17,7 +17,7 @@ class Request
     {
         $request = new static;
 
-        $request->uri = $_SERVER['REQUEST_URI'];
+        $request->uri = explode('?', $_SERVER['REQUEST_URI'])[0];
         $request->method = Method::from($_SERVER['REQUEST_METHOD']);
         $request->headers = getallheaders();
         $request->query = $_GET;

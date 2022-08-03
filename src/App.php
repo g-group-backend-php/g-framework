@@ -23,10 +23,10 @@ class App
 
     public function run(): void
     {
-        $route = $this->router->resolve(Request::create());
+        [$route, $pathParams] = $this->router->resolve(Request::create());
 
         /** @var Response $response */
-        $response = $this->callMethod($route->getController(), $route->getAction());
+        $response = $this->callMethod($route->getController(), $route->getAction(), $pathParams);
         $response->render();
     }
 
@@ -38,7 +38,7 @@ class App
         }
     }
 
-    public function callMethod(string $className, string $methodName)
+    public function callMethod(string $className, string $methodName, array $pathParams)
     {
         // Pobieramy lub tworzymy instancję kontrolera przy pomocy kontenera
         $instance = $this->container->has($className)
@@ -53,6 +53,15 @@ class App
         // Instancjonujemy każdy z parametrów metody
         $parameters = [];
         foreach ($method->getParameters() as $parameter) {
+            if ($parameter->getType()->isBuiltin()) {
+                $parameterValue = $pathParams[$parameter->getName()];
+                settype($parameterValue, $parameter->getType()->getName());
+
+                $parameters[] = $parameterValue;
+
+                continue;
+            }
+
             if ($this->container->has($parameter->getType()->getName())) {
                 $parameters[] = $this->container->get($parameter->getType()->getName());
             } else {

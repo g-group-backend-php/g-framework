@@ -10,7 +10,8 @@ class Route
         protected Method $method,
         protected string $route,
         protected string $controller,
-        protected string $action
+        protected string $action,
+        protected array $pathParams = []
     ) {}
 
     public function getMethod(): Method
@@ -31,5 +32,10 @@ class Route
     public function getAction(): string
     {
         return $this->action;
+    }
+
+    public function getPathParams(): array
+    {
+        return $this->pathParams;
     }
 }
