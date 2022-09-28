@@ -7,7 +7,8 @@
             "Globe\\Container\\": "container/",
             "Globe\\Http\\": "http/",
             "Globe\\Finder\\": "finder/",
-            "Globe\\ConfigManager\\": "config-manager/"
+            "Globe\\ConfigManager\\": "config-manager/",
+            "Globe\\Console\\": "console/"
         }
     },
     "authors": [
