@@ -8,9 +8,12 @@ use ReflectionClass;
 
 class RouterFactory
 {
-    public function createRouter(): Router
+    public function createRouter(array $controllersPaths): Router
     {
-        $controllers = ClassFinder::findClass('src/Controller');
+        $controllers = [];
+        foreach ($controllersPaths as $controllersPath) {
+            $controllers = [...$controllers, ...ClassFinder::findClass($controllersPath)];
+        }
 
         $routes = [];
         foreach ($controllers as $controller) {

@@ -1,0 +1,4 @@
+services:
+  App\Service\DatabaseInfoService:
+    arguments:
+      url: 'mysql://root:root@localhost/test'

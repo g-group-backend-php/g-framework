@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Globe\ConfigManager\ConfigManager;
+use Globe\ConfigManager\ConfigManagerFactory;
 use Globe\Container\Container;
 use Globe\Http\Request;
 use Globe\Http\Response;
@@ -13,12 +15,19 @@ class App
 {
     protected Container $container;
     protected Router $router;
+    protected ConfigManager $configManager;
 
     public function __construct()
     {
         $this->createContainer();
+
+        $configManagerFactory = new ConfigManagerFactory();
+        $this->configManager = $configManagerFactory->createConfigManager();
+
         $routerFactory = new RouterFactory();
-        $this->router = $routerFactory->createRouter();
+        $this->router = $routerFactory->createRouter(
+            $this->configManager->get('controllers')
+        );
     }
 
     public function run(): void

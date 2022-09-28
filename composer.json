@@ -6,7 +6,8 @@
             "App\\": "src/",
             "Globe\\Container\\": "container/",
             "Globe\\Http\\": "http/",
-            "Globe\\Finder\\": "finder/"
+            "Globe\\Finder\\": "finder/",
+            "Globe\\ConfigManager\\": "config-manager/"
         }
     },
     "authors": [
