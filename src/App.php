@@ -3,7 +3,7 @@
 namespace App;
 
 use Globe\Http\Request;
-use Globe\Http\Response;
+use Globe\Http\Response\JsonResponse;
 use Globe\Http\Router\Router;
 use Globe\Http\Router\RouterFactory;
 
@@ -25,7 +25,7 @@ class App extends Kernel
     {
         [$route, $pathParams] = $this->router->resolve(Request::create());
 
-        /** @var Response $response */
+        /** @var JsonResponse $response */
         $response = $this->callMethod($route->getController(), $route->getAction(), $pathParams);
         $response->render();
     }

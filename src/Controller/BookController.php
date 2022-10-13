@@ -4,23 +4,23 @@ namespace App\Controller;
 
 use Globe\Http\Attribute\Route;
 use Globe\Http\Enum\Method;
-use Globe\Http\Response;
+use Globe\Http\Response\JsonResponse;
 
 class BookController
 {
     #[Route(Method::GET, '/books/{id: \d+}')]
-    public function show(int $id): Response
+    public function show(int $id): JsonResponse
     {
-        return new Response(200, [
+        return new JsonResponse(200, [
             'id' => $id,
             'name' => 'Ojciec Chrzestny',
         ]);
     }
 
     #[Route(Method::GET, '/books')]
-    public function index(): Response
+    public function index(): JsonResponse
     {
-        return new Response(200, [
+        return new JsonResponse(200, [
             [
                 'id' => 1,
                 'name' => 'Ojciec Chrzestny',
