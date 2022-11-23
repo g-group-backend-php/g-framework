@@ -30,7 +30,7 @@ abstract class Kernel
         }
     }
 
-    protected function callMethod(string $className, string $methodName, array $pathParams)
+    protected function callMethod(string $className, string $methodName, array $primitiveParams = [])
     {
         $instance = $this->container->has($className)
             ? $this->container->get($className)
@@ -43,7 +43,7 @@ abstract class Kernel
         $parameters = [];
         foreach ($method->getParameters() as $parameter) {
             if ($parameter->getType()->isBuiltin()) {
-                $parameterValue = $pathParams[$parameter->getName()];
+                $parameterValue = $primitiveParams[$parameter->getName()];
                 settype($parameterValue, $parameter->getType()->getName());
 
                 $parameters[] = $parameterValue;

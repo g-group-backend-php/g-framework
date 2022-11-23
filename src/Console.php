@@ -18,13 +18,14 @@ class Console extends Kernel
         $this->commandManager = $commandManagerFactory->createCommandManager(
             $this->configManager->get('commands')
         );
+
+        $this->container->set(Input::create(), Input::class);
     }
 
     public function run(): void
     {
-        $input = Input::create();
-        $command = $this->commandManager->resolve($input);
+        $command = $this->commandManager->resolve($this->container->get(Input::class));
 
-        $command->run($input);
+        $this->callMethod($command::class, 'run');
     }
 }

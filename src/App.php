@@ -19,11 +19,13 @@ class App extends Kernel
         $this->router = $routerFactory->createRouter(
             $this->configManager->get('controllers')
         );
+
+        $this->container->set(Request::create(), Request::class);
     }
 
     public function run(): void
     {
-        [$route, $pathParams] = $this->router->resolve(Request::create());
+        [$route, $pathParams] = $this->router->resolve($this->container->get(Request::class));
 
         /** @var Response $response */
         $response = $this->callMethod($route->getController(), $route->getAction(), $pathParams);
